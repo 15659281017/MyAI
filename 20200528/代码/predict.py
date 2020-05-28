@@ -18,9 +18,9 @@ def model():
         input_shape = (img_width, img_height, 3)
 
     model = Sequential()
-    model.add(Conv2D(32, (3, 3), input_shape=input_shape)) #卷积层 32个过滤器 核尺寸3x3
-    model.add(Activation('relu')) #激活层
-    model.add(MaxPooling2D(pool_size=(2, 2))) #池化层 池大小2x2
+    model.add(Conv2D(32, (3, 3), input_shape=input_shape))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Conv2D(32, (3, 3)))
     model.add(Activation('relu'))
@@ -30,8 +30,16 @@ def model():
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
+    model.add(Conv2D(64, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Conv2D(128, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
     model.add(Flatten())
-    model.add(Dense(64))
+    model.add(Dense(128))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
     model.add(Dense(6))  # 6分类
@@ -41,5 +49,5 @@ def model():
                   optimizer='rmsprop',
                   metrics=['accuracy'])
 
-    model.load_weights("weights-improvement-26-0.67.h5")
+    model.load_weights("weights-improvement-30-0.74.h5")
     return model
