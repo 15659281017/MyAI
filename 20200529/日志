@@ -1,0 +1,53 @@
+    今天通过增加神经网络层和改变epochs、batch_size训练出来了两个准确率较高的模型。 
+    
+    1、weights-improvement-27-0.73.h5（准确率73%）
+    这个模型的epochs为32，batch_size为15，使用了5个卷积层和2个Dense层，并且在卷积层之间加入了Dropout来放置过拟合。代码如下：
+        
+        model = Sequential()
+        model.add(Conv2D(32, (3, 3),  input_shape=input_shape, padding="same"))
+        model.add(Activation('relu'))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Conv2D(32, (3, 3)))
+        model.add(Activation('relu'))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Dropout(0.25))
+
+        model.add(Conv2D(64, (3, 3), padding="same"))
+        model.add(Activation('relu'))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Conv2D(64, (3, 3)))
+        model.add(Activation('relu'))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Dropout(0.25))
+
+        model.add(Conv2D(128, (3, 3), padding="same"))
+        model.add(Activation('relu'))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Dropout(0.25))
+
+        model.add(Flatten())
+        model.add(Dense(128))
+        model.add(Activation('relu'))
+        model.add(Dropout(0.5))
+        model.add(Dense(6))  # 6分类
+        model.add(Activation('softmax'))  # 采用Softmax
+        
+    2、weights-improvement-31-0.76.h5（准确率76%）
+    这个模型是在上面一个模型之间训练出来的，使用的代码有所不同，但是我当时忘记记录了，所以现在不知道当时使用的代码具体是什么，大概好像是没有在卷积层之间加入Dropout。
+    
+    小结：
+    在先后对两个模型的测试中，发现模型的准确率还是不错的一个达到了76%，一个达到了73%，但是两者准确率都仍需要进一步提高。
+    值得指出的是，使用不同的模型进行测试时，对于同一张图片，会做出不同的判断。如对同一个plastic塑料瓶的分析中，weights-improvement-31-0.76的判断就是正确的plastic；而weights-improvement-27-0.73的判断则是glass，是错误的。而两个模型共性的是，有一些图片他们俩都无法正确识别，但是他们俩的识别结果仍互不相同，可谓是“闻道有先后，术业有专攻”？哈哈哈~
+    今天还遇到了一些其他的问题，如将batch_size设置太大时，会导致电脑的GPU不够用，程序报错无法运行，电脑会出现发热、卡顿、黑屏的现象。于是我只好乖乖把batch_size调回原来的值。跑程序真的很费电脑啊！
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
