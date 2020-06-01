@@ -8,10 +8,10 @@
 ·主要功能：实现对垃圾图片的识别与分类。
 
 ·操作流程：
-1、运行train.py文件，生成许多训练模型，然后会调用plot.py绘制每一次epoch的模型的训练准确率accuracy、训练损失loss、验证准确率val_acc、验证损失val_loss，并将图片保存到本地。
-2、选择准确率最高的一个模型，使用predict.py载入模型。
-3、运行main.py，会调用prepare_image.py来进行最后的展示。
-4、prepare_image.py会从测试集里随机抽取任意种类的垃圾图片共15张，按每行5张，一共3行排列，并在每张图片的上方显示预测种类“pred”和实际种类“truth”来对比模型的准确性，并将图片保存到本地。
+	1、运行train.py文件，生成许多训练模型，然后会调用plot.py绘制每一次epoch的模型的训练准确率accuracy、训练损失loss、验证准确率val_acc、验证损失val_loss，并将图片保存到本地。
+	2、选择准确率最高的一个模型，使用predict.py载入模型。
+	3、运行main.py，会调用prepare_image.py来进行最后的展示。
+	4、prepare_image.py会从测试集里随机抽取任意种类的垃圾图片共15张，按每行5张，一共3行排列，并在每张图片的上方显示预测种类“pred”和实际种类“truth”来对比模型的准确性，并将图片保存到本地。
 	
 ·模型：
     我们在机器学习的时候采用CNN卷积神经网为原理，使用Sequential线性模型，在分类方法上使用了Softmax多分类方法。
